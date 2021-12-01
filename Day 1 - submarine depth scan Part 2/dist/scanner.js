@@ -1,39 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_1 = require("./data");
-class SlidingWindow {
-    a;
-    b;
-    c;
-    constructor(a, b, c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
-    pushAndReturn(newData) {
-        return new SlidingWindow(this.b, this.c, newData);
-    }
-    getSum() {
-        return this.a + this.b + this.c;
-    }
-}
-var lastSlidingWindow;
-var currentSlidingWindow;
 var count = 0;
-var lastThreeDataPoints = [];
-data_1.data.forEach(currentDataPoint => {
-    if (lastThreeDataPoints.length !== 3) {
-        lastThreeDataPoints.push(currentDataPoint);
-        return;
-    }
-    else if (lastSlidingWindow === undefined) {
-        lastSlidingWindow = new SlidingWindow(lastThreeDataPoints[0], lastThreeDataPoints[1], lastThreeDataPoints[2]);
-    }
-    currentSlidingWindow = lastSlidingWindow.pushAndReturn(currentDataPoint);
-    if (currentSlidingWindow.getSum() > lastSlidingWindow.getSum()) {
+for (let i = 3; i < data_1.data.length; i++) {
+    // We can simplyify following approach by ignoring data[i-2] and data[i-1], since they get added on both:
+    // var currentWindow = data[i] + data [i-1] + data[i-2]
+    // var previousWindow = data[i-1] + data[i-2] +data[i-3]
+    var currentWindow = data_1.data[i];
+    var previousWindow = data_1.data[i - 3];
+    if (currentWindow > previousWindow) {
         count++;
     }
-    lastSlidingWindow = currentSlidingWindow;
-});
+}
 console.log(count);
+// 1457
 //# sourceMappingURL=scanner.js.map

@@ -1,55 +1,22 @@
 import { data } from './data'
 
 
-class SlidingWindow {
-    a: number 
-    b: number
-    c: number
+var count: number = 0
 
-    constructor(a:number, b:number, c:number) {
-        this.a = a
-        this.b = b
-        this.c = c
-    }
+for (let i = 3; i < data.length; i++) {
 
-    pushAndReturn(newData: number):SlidingWindow {
-        return new SlidingWindow(this.b, this.c, newData)
-    }
+    // We can simplyify following approach by ignoring data[i-2] and data[i-1], since they get added on both:
+    // var currentWindow = data[i] + data [i-1] + data[i-2]
+    // var previousWindow = data[i-1] + data[i-2] +data[i-3]
 
-    getSum(): number {
-        return this.a + this.b + this.c
+    var currentWindow = data[i]
+    var previousWindow = data[i-3]
+
+    if (currentWindow > previousWindow) {
+        count++
     }
 }
 
-var lastSlidingWindow: SlidingWindow
-var currentSlidingWindow: SlidingWindow
-
-
-var count: number = 0
-
-var lastThreeDataPoints: Array<number> = []
-
-data.forEach(currentDataPoint => {
-
-    if (lastThreeDataPoints.length !== 3) {
-        lastThreeDataPoints.push(currentDataPoint)
-        return
-    } else if (lastSlidingWindow === undefined) {
-        lastSlidingWindow = new SlidingWindow(
-            lastThreeDataPoints[0], 
-            lastThreeDataPoints[1], 
-            lastThreeDataPoints[2]
-        )
-    }
-
-    currentSlidingWindow = lastSlidingWindow.pushAndReturn(currentDataPoint)
-
-    if (currentSlidingWindow.getSum() > lastSlidingWindow.getSum()) {
-        count++
-    }
-    
-    lastSlidingWindow = currentSlidingWindow
-    
-});
-
 console.log(count)
+
+// 1457
