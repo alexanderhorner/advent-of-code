@@ -1,0 +1,12 @@
+{
+  "name": "submarine-depth-scan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scanner.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node ./dist/scanner.js"
+  },
+  "author": "Alexander Horner",
+  "license": "MIT"
+}
