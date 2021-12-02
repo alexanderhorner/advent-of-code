@@ -1,0 +1,11 @@
+{
+  "name": "dive2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node ./dist/converter.js"
+  },
+  "author": "Alexander Horner",
+  "license": "MIT"
+}
